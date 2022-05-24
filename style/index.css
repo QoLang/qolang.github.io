@@ -1,0 +1,38 @@
+.mid {
+    padding-left: 10em;
+    padding-right: 10em;
+}
+
+.head {
+    background-color: #262626;
+}
+
+.tab {
+    background-color: #262626;
+    color: #BCBCBC !important;
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0;
+    text-decoration: none;
+    user-select: none;
+    border: none;
+    border-top: 3px solid #262626;
+}
+
+.tab:hover {
+    background-color: #1C1C1C;
+}
+
+.active-tab {
+    border-color: #111111;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #444444;
+}
+
+code {
+    background-color: #262626;
+    border-radius: 3px;
+    padding: 3px;
+}

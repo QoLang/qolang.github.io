@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<title>QoLang</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://prismjs.com/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" />
+<link href="https://prismjs.com/plugins/toolbar/prism-toolbar.css" rel="stylesheet" />
+<link href="/style/prism-apprentice.css" rel="stylesheet" />
+<link href="/style/index.css" rel="stylesheet" />
+<link href="/style/apprentice.css" rel="stylesheet" />
+<body class="">
+<!-- Page Content -->
+<div class="w3-container border-bottom mid head">
+  <h1><img src="/images/qolang.png" width="32"/> The Qo Programming Language</h1>
+  The Qo Programming Language is a simple language with simple syntax.
+<pre><code class="language-qo line-numbers">
+/*
+Printing in QoLang.
+*/
+
+println("Hello, world!");
+</code></pre>
+<center>
+  <button class="tab active-tab" onclick="chTab(event,'About')" id="AboutTab">About</button>
+  <button class="tab" onclick="chTab(event,'Install')" id="InstallTab">Install</button>
+  <button class="tab" onclick="chTab(event,'Related')" id="RelatedTab">Related Projects</button>
+  <button class="tab" onclick="window.location.href = '/docs'">Documentation</button>
+</center>
+</div>
+<div class="w3-container mid">
+  <div id="About" class="w3-panel section" style="display:block">
+    some boring info here
+  </div>
+  <div id="Install" class="w3-panel section" style="display:none">
+    Download the binary from here: <a href="https://github.com/QoLang/QoLang/releases"><img src="/images/get_qolang.svg"></img></a>
+
+    <h3>GNU/Linux</h3>
+    <p>
+      Do what the <code>Makefile</code> does, copy the binary to <code>/usr/local/bin/qo</code> with root permissions.
+    </p>
+    <h3>Microsoft Windows</h3>
+    <p>
+      <ol>
+        <li>First, you need a folder that's in the <code>Path</code>. </li>
+        <li>Create a directory called <code>qolang</code> under <code>C:\</code>, then copy the binary you just downloaded to that folder. </li>
+        <li>Press the Windows key, search for "advanced system settings", and click on "View advanced system settings". </li>
+        <li>Click on "Environment Variables", then look for a variable named <code>Path</code>. Select that and click on the Edit button. </li>
+        <li>Click on the "New" button, and add <code>C:\qolang</code>. </li>
+      </ol>
+      To test it, create a file called <code>test.qo</code> and write the following code in it:
+      <pre>
+        <code class="language-qo">
+println("Hello, world!");
+        </code>
+      </pre>
+      After saving the file, copy the path the file is in, eg. <code>C:\Users\user</code>. Press Windows Key + R and type <code>cmd</code>, type <code>cd </code> (with the space after cd) and click right mouse button the paste the clipboard content, and press Enter. Now you can run your file, to do it run <code>qo test.qo</code>.<br />
+      <b>Note:</b> This guide was not tested, and there may be mistakes. If you notice something that shouldn't be, please <a href="qolang@camroku.tech">contact us</a>.
+    </p>
+    <h3>Apple MacOS</h3>
+    <p>
+      Please <a href="https://github.com/QoLang/website">contribute us</a> and add guide for MacOS!
+    </p>
+  </div>
+  <div id="Related" class="w3-panel section" style="display:none">
+    <ul>
+      <li><a href="https://github.com/QoLang/QoLang">QoLang/QoLang</a> - QoLang itself</li>
+      <li><a href="https://github.com/QoLang/qo-prism">QoLang/qo-prism</a> - QoLang support for Prism.js</li>
+      <li><a href="https://github.com/QoLang/website">QoLang/website</a> - This website</li>
+    </ul>
+  </div>
+</div>
+<script>
+if (window.location.hash && document.getElementById(window.location.hash.substring(1) + "Tab")) {
+  document.getElementById(window.location.hash.substring(1) + "Tab").click();
+}
+
+function chTab(evt, tab) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("section");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tab");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active-tab", "");
+  }
+  document.getElementById(tab).style.display = "block";
+  evt.currentTarget.className += " active-tab";
+  window.location.hash = "#" + tab;
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+<script src="https://prismjs.com/plugins/toolbar/prism-toolbar.js"></script>
+<script src="https://prismjs.com/plugins/line-numbers/prism-line-numbers.js"></script>
+<script src="https://prismjs.com/plugins/normalize-whitespace/prism-normalize-whitespace.js"></script>
+<script src="https://prismjs.com/plugins/show-language/prism-show-language.js"></script>
+<script src="/scripts/qo-prism.js"></script>
+</body>
+</html>
