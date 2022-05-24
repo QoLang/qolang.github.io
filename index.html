@@ -82,7 +82,7 @@ function chTab(evt, tab) {
   }
   tablinks = document.getElementsByClassName("tab");
   for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active-tab", "");
+    tablinks[i].className = tablinks[i].className.replace("active-tab", "");
   }
   document.getElementById(tab).style.display = "block";
   evt.currentTarget.className += " active-tab";
