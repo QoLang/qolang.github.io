@@ -1,6 +1,6 @@
 Prism.languages['qo'] = {
     'comment': /(\/\*[^\*\/]*\*\/)/s,
-    'string': /(".*"|'.*')/,
+    'string': /("[^"]*"|'[^"]*')/s,
 	'keyword': /(func|elif|if|else|return|foreach|for|while|times)/,
     'number': /([0-9]+)/,
     'function': /([a-zA-Z0-9_]+)(?=\()/,
