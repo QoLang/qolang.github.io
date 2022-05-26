@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<title>QoLang Docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://prismjs.com/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" />
+<link href="https://prismjs.com/plugins/toolbar/prism-toolbar.css" rel="stylesheet" />
+<link href="/style/prism-apprentice.css" rel="stylesheet" />
+<link href="/style/index.css" rel="stylesheet" />
+<link href="/style/apprentice.css" rel="stylesheet" />
+<body class="">
+<!-- Page Content -->
+<div class="w3-container border-bottom mid head">
+  <h1><img src="/images/qolang.png" width="32"/> The Qo Programming Language Documentation</h1>
+<center>
+  <button class="tab" onclick="window.location.href = '/#About'">About</button>
+  <button class="tab" onclick="window.location.href = '/#Install'">Install</button>
+  <button class="tab" onclick="window.location.href = '/#Related'">Related Projects</button>
+  <button class="tab active-tab">Documentation</button>
+</center>
+</div>
+<div class="sidebar" style="width:25%">
+  <button class="side side-active" onclick="chTab(event,'QuickStart')" id="QuickStartTab">Quick Start</a>
+  <button class="side" onclick="chTab(event,'StandardLib')" id="StandardLibTab">Standard Library</a>
+</div>
+<div class="w3-container mid" style="margin-left: 200px;">
+  <div id="QuickStart" class="w3-panel section" style="display:block">
+    So, you decided to learn QoLang? Then, you're in the right place, the official documentation.
+    <h1>How does it work?</h1>
+    <i>Skip this part if the only thing you want to learn is the language itself.</i>
+    <p>
+      The QoLang interpreter is made of 3 different parts; Lexer, Parser, and the actual Interpreter.
+      <h2>Lexer</h2>
+      <p>
+        Lexer is the part of QoLang that iterates through the characters in the input file and returns tokens.
+        <br />
+        Example:
+        <pre>
+<code class="language-qo line-numbers">println("Hello, world!");</code>
+        </pre>
+        After lexing:
+        <pre><code class="language-qo line-numbers">Token(FUNCCALL, 'println', 1, 8)
+Token(LPAREN, '(', 1, 9)
+Token(STRING, 'Hello, world!', 1, 24)
+Token(RPAREN, ')', 1, 25)
+Token(SEMI, ';', 1, 26)</code>
+        </pre>
+        What it did is:
+        <ol>
+            <li>Get a char.</li>
+            <li>It's an alnum (alpha-numerical) or <code>_</code>, get an ID.</li>
+            <li>Got variable <code>println</code>, but it has <code>(</code> character after the ID. This is a function call.</li>
+            <li>Got token <code>(</code></li>
+            <li>Got char <code>"</code>, so this is a string.</li>
+            <li>Got token STRING <code>Hello, world!</code></li>
+            <li>Got token <code>)</code></li>
+            <li>Got token <code>;</code></li>
+        </ol>
+      </p>
+      <h2>Parser</h2>
+      <p>
+        Now, we have some tokens. Time to parse these!
+        <br />
+        It will do these:
+        <ol>
+            <li>Call <code>statement</code> function</li>
+            <li>Got FUNCCALL, call <code>fnccall</code> function.</li>
+            <li>Token is FUNCCALL, no errors.</li>
+            <li>Token is LPAREN, no errors.</li>
+            <li>Call <code>expr</code> function.</li>
+            <li>Got STRING <code>Hello, world!</code>.</li>
+            <li>Couldn't find COMMA token, found RPAREN instead. No errors.</li>
+            <li>Return an <code>FuncCall</code> AST Node with the args and the function.</li>
+            <li>Token is SEMI, no errors.</li>
+        </ol>
+      </p>
+      <h2>Interpreter</h2>
+      <p>
+        This is the part where we do things.
+        <ol>
+            <li>We have an AST Node called <code>FuncCall</code>, call <code>visit_FuncCall</code>.</li>
+            <li>No variable named <code>println</code> exists, but <code>func_println</code> does. This is a built-in function, call <code>visit_BuiltinFunc</code></li>
+            <li>Call the function with the <code>Variables</code> class instance and the arguments.</li>
+            <li>Print the string.</li>
+            <li>Update the <code>Variables</code> class instance.</li>
+        </ol>
+      </p>
+      Congratulations for us, we have printed <code>Hello, world!</code>
+    </p>
+    <h1>Syntax</h1>
+    Some pseudo-code for understanding the syntax:
+    <pre><code class="language-qo line-numbers">
+/* Comment block */
+
+/* Strings */
+"test" /* Normal string */
+%"test\n" /* Formatted string */
+
+/* Keywords */
+func identity(arg1, arg2){
+    code();
+    return 12345;
+}; /* Note the `;` */
+
+if(boolean){code();}
+elif(boolean){code();}
+else if(boolean){code();}
+else{code();};
+
+foreach &pointer in [a, b, c] {code();};
+
+for(i = 0; i < 3; i = i + 1){code();};
+
+while(boolean){code();};
+
+times 5 {code();};
+
+times 5 as &pointer {code();};
+
+/* Number */
+1234
+
+/* Function */
+code();
+
+/* Variable */
+abc123_123
+
+/* Pointer */
+&variable
+
+/* None Type */
+None
+
+/* Operators */
++ - * / = < > <= >= == != as in && ||
+</code></pre>
+
+    For information about standard functions, see <a href="#" onclick="chTab(event,'StandardLib')">Standard Library Documentation</a>.
+  </div>
+  <div id="StandardLib" class="w3-panel section" style="display:block">
+    <h1>Table of Contents</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Function</th>
+          <th>Return</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="#docs.func_print"><code class="language-qo">print(...)</code></a></td>
+          <td><code>0</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_println"><code class="language-qo">println(...)</code></a></td>
+          <td><code>0</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_input"><code class="language-qo">input(prompt)</code></a></td>
+          <td><code>Str</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_toInt"><code class="language-qo">toInt(value)</code></a></td>
+          <td><code>Int</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_toBool"><code class="language-qo">toBool(value)</code></a></td>
+          <td><code>Bool</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_toStr"><code class="language-qo">toStr(value)</code></a></td>
+          <td><code>Str</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_type"><code class="language-qo">type(value)</code></a></td>
+          <td><code>Str</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_exit"><code class="language-qo">exit(exitcode)</code></a></td>
+          <td>Exits before returning</td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_mod"><code class="language-qo">mod(integer1, integer2)</code></a></td>
+          <td><code>Int</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <h1>Documentation</h1>
+    <h3 id="docs.func_print"><a href="#docs.func_print"><code class="language-qo">print(...)</code></a></h3>
+    <p>
+      Print something, multiple values are joined with <code>" "</code> as delimiter. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+print("Hello, world!");
+print("Hello,", "world!");
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_println"><a href="#docs.func_println"><code class="language-qo">println(...)</code></a></h3>
+    <p>
+      Print something with newlnie, multiple values are joined with <code>" "</code> as delimiter. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+println("Hello, world!");
+println("Hello,", "world!");
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_input"><a href="#docs.func_input"><code class="language-qo">input(prompt)</code></a></h3>
+    <p>
+      Get input with specified prompt and assign to specified variable. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+command = input("> ");
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_toInt"><a href="#docs.func_toInt"><code class="language-qo">toInt(value)</code></a></h3>
+    <p>
+      Convert any type of variable to Int.<br />
+      Example:
+      <pre>
+        <code class="language-qo">
+mynum = toInt("10");
+mynum = toInt(10);
+mynum = toInt(True);
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_toBool"><a href="#docs.func_toBool"><code class="language-qo">toBool(value)</code></a></h3>
+    <p>
+      Convert any type of variable to Bool. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+mybool = toBool("");
+mybool = toBool(1);
+mybool = toBool(True);
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_toStr"><a href="#docs.func_toStr"><code class="language-qo">toStr(value)</code></a></h3>
+    <p>
+      Convert any type of variable to Str. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+mystr = toStr("abc");
+mystr = toStr(1351);
+mystr = toStr(False);
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_type"><a href="#docs.func_type"><code class="language-qo">type(value)</code></a></h3>
+    <p>
+      Get type of something and assign it to specified variable. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+mytype = type(False);
+mytype = type(13613);
+mytype = type("hey");
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_exit"><a href="#docs.func_exit"><code class="language-qo">exit(exitcode)</code></a></h3>
+    <p>
+      Exit with code. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+exit();
+exit(1);
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_mod"><a href="#docs.func_mod"><code class="language-qo">mod(integer1, integer2)</code></a></h3>
+    <p>
+      Math modulus function. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+mynum = mod(5, 3);
+        </code>
+      </pre>
+    </p>
+  </div>
+</div>
+<script>
+if (window.location.hash && document.getElementById(window.location.hash.substring(1) + "Tab")) {
+  document.getElementById(window.location.hash.substring(1) + "Tab").click();
+}
+
+if (window.location.hash && window.location.hash.startsWith("#docs.")) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("section");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("side");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace("side-active", "");
+  }
+  document.getElementById("StandardLib").style.display = "block";
+  document.getElementById("StandardLibTab").className += " side-active";
+  document.getElementById(window.location.hash.substring(1)).scrollIntoView();
+}
+
+function chTab(evt, tab) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("section");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("side");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace("side-active", "");
+  }
+  document.getElementById(tab).style.display = "block";
+  evt.currentTarget.className += " side-active";
+  window.location.hash = "#" + tab;
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+<script src="https://prismjs.com/plugins/toolbar/prism-toolbar.js"></script>
+<script src="https://prismjs.com/plugins/line-numbers/prism-line-numbers.js"></script>
+<script src="https://prismjs.com/plugins/normalize-whitespace/prism-normalize-whitespace.js"></script>
+<script src="https://prismjs.com/plugins/show-language/prism-show-language.js"></script>
+<script src="/scripts/qo-prism.js"></script>
+</body>
+</html>

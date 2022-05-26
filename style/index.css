@@ -36,3 +36,27 @@ code {
     border-radius: 3px;
     padding: 3px;
 }
+
+.sidebar {
+    height: 100%;
+    width: 200px;
+    z-index: 1;
+    overflow: auto;
+    display: block;
+    position: absolute;
+}
+
+.sidebar * {
+    width: 100%;
+    display: block;
+    padding: 8px 16px;
+    text-align: left;
+    border: none;
+    color: #BCBCBC !important;
+    background-color: #262626;
+    border-left: 3px solid #262626;
+}
+
+.side-active {
+    border-left: 3px solid #111111;
+}
