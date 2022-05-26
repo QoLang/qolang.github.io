@@ -29,7 +29,16 @@ println("Hello, world!");
 </div>
 <div class="w3-container mid">
   <div id="About" class="w3-panel section" style="display:block">
-    some boring info here
+    The Qo Programming Language (or shortly, QoLang) is a new interpreted language with a simple syntax. <br />
+    A simple example:
+    <pre>
+      <code class="language-qo">
+myinteger = toInt(input("Enter an integer: "));
+println(myinteger, "% 2 ==", mod(myinteger, 2));
+      </code>
+    </pre>
+    Every statement in QoLang (including statements like <code class="language-qo">if</code>) end with <code class="language-qo">;</code>. <br />
+    QoLang is a pretty new language, with too few contributors, so it may have some bugs. If you notice something is wrong with QoLang, please <a href="https://github.com/QoLang/QoLang/issues/new">create an issue</a> in GitHub.
   </div>
   <div id="Install" class="w3-panel section" style="display:none">
     Download the binary from here: <a href="https://github.com/QoLang/QoLang/releases/latest"><img src="/images/get_qolang.svg"></img></a>
