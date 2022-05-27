@@ -1,2 +1,7 @@
 # The Qo Programming Language Website
-Still under development. Some links may be broken.
+A static website for QoLang.
+
+Clone using this command:
+```sh
+git clone --recurse-submodules https://github.com/QoLang/website
+```
