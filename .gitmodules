@@ -1,0 +1,3 @@
+[submodule "scripts/qo-prism"]
+	path = scripts/qo-prism
+	url = https://github.com/QoLang/qo-prism.git
