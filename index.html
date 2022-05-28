@@ -47,16 +47,12 @@ println(myinteger, "% 2 ==", mod(myinteger, 2));
     <p>
       Do what the <code>Makefile</code> does, copy the binary to <code>/usr/local/bin/qo</code> and copy the <a href="https://github.com/QoLang/QoLang/tree/master/libs">libraries</a> to <code>/usr/lib/qo/</code>.
     </p>
-    <h3>Other</h3>
-    <p>
-      QoLang currently doesn't have support for other operating systems, so you need a GNU/Linux virtual machine (or WSL on Windows) to run QoLang.
-    </p>
-    <!--
     <h3>Microsoft Windows</h3>
     <p>
       <ol>
         <li>First, you need a folder that's in the <code>Path</code>. </li>
         <li>Create a directory called <code>qolang</code> under <code>C:\</code>, then copy the binary you just downloaded to that folder. </li>
+        <li>Create a directory called <code>libs</code> under <code>C:\qolang\</code>, then copy all files in <a href="https://github.com/QoLang/QoLang/tree/master/libs">libs</a> directory to that folder.</li>
         <li>Press the Windows key, search for "advanced system settings", and click on "View advanced system settings". </li>
         <li>Click on "Environment Variables", then look for a variable named <code>Path</code>. Select that and click on the Edit button. </li>
         <li>Click on the "New" button, and add <code>C:\qolang</code>. </li>
@@ -70,7 +66,9 @@ println("Hello, world!");
       After saving the file, copy the path the file is in, eg. <code>C:\Users\user</code>. Press Windows Key + R and type <code>cmd</code>, type <code>cd </code> (with the space after cd) and click right mouse button the paste the clipboard content, and press Enter. Now you can run your file, to do it run <code>qo test.qo</code>.<br />
       <b>Note:</b> This guide was not tested, and there may be mistakes. If you notice something that shouldn't be, please <a href="mailto:qolang@camroku.tech">contact us</a>.
     </p>
-    -->
+    <h3>Other</h3>
+    <p>
+      QoLang currently doesn't have support for other operating systems, so you need a GNU/Linux virtual machine (or WSL on Windows) to run QoLang.
     </p>
   </div>
   <div id="Related" class="w3-panel section" style="display:none">
