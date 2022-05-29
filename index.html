@@ -49,12 +49,9 @@ println(myinteger, "% 2 ==", mod(myinteger, 2));
     <p>
       Download the binary from here: <a href="https://github.com/QoLang/QoLang/releases/latest"><img src="/images/get_qolang.svg"></img></a>
       <ol>
-        <li>First, you need a folder that's in the <code>Path</code>. </li>
         <li>Create a directory called <code>qolang</code> under <code>C:\</code>, then copy the binary you just downloaded to that folder. </li>
         <li>Create a directory called <code>libs</code> under <code>C:\qolang\</code>, then copy all files in <a href="https://github.com/QoLang/QoLang/tree/master/libs">libs</a> directory to that folder.</li>
-        <li>Press the Windows key, search for "advanced system settings", and click on "View advanced system settings". </li>
-        <li>Click on "Environment Variables", then look for a variable named <code>Path</code>. Select that and click on the Edit button. </li>
-        <li>Click on the "New" button, and add <code>C:\qolang</code>. </li>
+        <li>Run <code>cmd.exe</code> as Administrator, and run <code>setx PATH "%PATH%;C:\qolang"</code></li>
       </ol>
       To test it, create a file called <code>test.qo</code> and write the following code in it:
       <pre>
