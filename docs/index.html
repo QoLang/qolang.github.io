@@ -120,7 +120,7 @@ times 5 as &pointer {code();};
 /* Number */
 1234
 
-/* Function */
+/* Function/statement */
 code();
 
 /* Variable */
@@ -133,7 +133,25 @@ abc123_123
 None
 
 /* Operators */
-+ - * / = < > <= >= == != as in && ||
++ - * / = < > <= >= == != as in && || +=
+
+/* Assignment/add statements */
+abc = 8;
+def += 2;
+
+/* Include */
+import test;
+import testpylib;
+
+/* Export */
+__export__ = [
+  "abc",
+  "def"
+];
+exportAll();
+
+/* Define */
+define SOMETHING;
 </code></pre>
 
     For information about standard functions, see <a href="#StandardLib" onclick="window.location.hash = '#StandardLib'; window.location.reload()">Standard Library Documentation</a>.
