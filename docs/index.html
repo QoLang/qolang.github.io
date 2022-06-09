@@ -139,6 +139,18 @@ Token(SEMI, ';', 1, 26)</code>
           <td><a href="#docs.func_mod"><code class="language-qo">mod(integer1, integer2)</code></a></td>
           <td><code>Int</code></td>
         </tr>
+        <tr>
+          <td><a href="#docs.func_hasAttr"><code class="language-qo">hasAttr(root, variable)</code></a></td>
+          <td><code>Bool</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_exists"><code class="language-qo">exists(variable)</code></a></td>
+          <td><code>Bool</code></td>
+        </tr>
+        <tr>
+          <td><a href="#docs.func_remove"><code class="language-qo">remove(variable)</code></a></td>
+          <td><code>None</code></td>
+        </tr>
       </tbody>
     </table>
     <h1>Documentation</h1>
@@ -240,6 +252,38 @@ exit(1);
       <pre>
         <code class="language-qo">
 mynum = mod(5, 3);
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_hasAttr"><a href="#docs.func_hasAttr"><code class="language-qo">hasAttr(root, variable)</code></a></h3>
+    <p>
+      Check if a variable has an attribute. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+mybool = hasAttr(&qcfi, "set");
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_exists"><a href="#docs.func_exists"><code class="language-qo">exists(variable)</code></a></h3>
+    <p>
+      Check if a variable exists. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+mybool = exists(&hello);
+        </code>
+      </pre>
+    </p>
+    <h3 id="docs.func_remove"><a href="#docs.func_remove"><code class="language-qo">remove(variable)</code></a></h3>
+    <p>
+      Remove a variable. <br />
+      Example:
+      <pre>
+        <code class="language-qo">
+hello = "Hello!";
+remove(&hello);
+println(exists(&hello)); /* False */
         </code>
       </pre>
     </p>
