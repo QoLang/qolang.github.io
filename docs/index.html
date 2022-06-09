@@ -87,76 +87,13 @@ Token(SEMI, ';', 1, 26)</code>
       </p>
       Congratulations for us, we have printed <code>Hello, world!</code>
     </p>
-    <h1>Syntax</h1>
-    Some pseudo-code for understanding the syntax:
-    <pre><code class="language-qo line-numbers">
-/* Comment block */
-
-/* Strings */
-"test" /* Normal string */
-%"test\n" /* Formatted string */
-
-/* Keywords */
-func identity(arg1, arg2){
-    code();
-    return 12345;
-}; /* Note the `;` */
-
-if(boolean){code();}
-elif(boolean){code();}
-else if(boolean){code();}
-else{code();};
-
-foreach &pointer in [a, b, c] {code();};
-
-for(i = 0; i < 3; i = i + 1){code();};
-
-while(boolean){code();};
-
-times 5 {code();};
-
-times 5 as &pointer {code();};
-
-/* Number */
-1234
-
-/* Function/statement */
-code();
-
-/* Variable */
-abc123_123
-
-/* Pointer */
-&variable
-
-/* None Type */
-None
-
-/* Operators */
-+ - * / = < > <= >= == != as in && || += **
-
-/* Assignment/add statements */
-abc = 8;
-def += 2;
-
-/* Include */
-import test;
-import testpylib;
-
-/* Export */
-__export__ = [
-  "abc",
-  "def"
-];
-exportAll();
-
-/* Define */
-define SOMETHING;
-</code></pre>
+    <h1>Example</h1>
+    The example from Github:
+    <pre class="language-qo line-numbers" data-src="https://raw.githubusercontent.com/QoLang/QoLang/master/example/test.qo"></pre>
 
     For information about standard functions, see <a href="#StandardLib" onclick="window.location.hash = '#StandardLib'; window.location.reload()">Standard Library Documentation</a>.
   </div>
-  <div id="StandardLib" class="w3-panel section" style="display:block">
+  <div id="StandardLib" class="w3-panel section" style="display:none">
     <h1>Table of Contents</h1>
     <table>
       <thead>
