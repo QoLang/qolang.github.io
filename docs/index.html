@@ -3,291 +3,34 @@
 <title>QoLang Docs</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://prismjs.com/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" />
-<link href="https://prismjs.com/plugins/toolbar/prism-toolbar.css" rel="stylesheet" />
-<link href="/style/prism-apprentice/prism-apprentice.css" rel="stylesheet" />
-<link href="/style/index.css" rel="stylesheet" />
-<link href="/style/apprentice.css" rel="stylesheet" />
+<link href="https://qolang.camroku.tech/style/index.css" rel="stylesheet" />
+<link href="https://qolang.camroku.tech/style/apprentice.css" rel="stylesheet" />
 <body class="">
 <!-- Page Content -->
 <div class="w3-container border-bottom mid head">
-  <h1><img src="/images/qolang.png" width="32"/> The Qo Programming Language Documentation</h1>
-<center>
-  <button class="tab" onclick="window.location.href = '/#About'">About</button>
-  <button class="tab" onclick="window.location.href = '/#Install'">Install</button>
-  <button class="tab" onclick="window.location.href = '/#Related'">Related Projects</button>
-  <button class="tab active-tab">Documentation</button>
-</center>
+  <h1><img src="https://qolang.camroku.tech/images/qolang.png" width="32"/> The Qo Programming Language Documentation</h1>
 </div>
 <div class="sidebar" style="width:25%">
-  <button class="side side-active" onclick="chTab(event,'QuickStart')" id="QuickStartTab">Quick Start</a>
-  <button class="side" onclick="chTab(event,'StandardLib')" id="StandardLibTab">Standard Library</a>
+<button class="side side-active" onclick="chTab(event,'docs.std')" id="docs.stdTab">std</button><button class="side" onclick="chTab(event,'docs.file')" id="docs.fileTab">file</button><button class="side" onclick="chTab(event,'docs.qcf')" id="docs.qcfTab">qcf</button><button class="side" onclick="chTab(event,'docs.qo')" id="docs.qoTab">qo</button><button class="side" onclick="chTab(event,'docs.random')" id="docs.randomTab">random</button><button class="side" onclick="chTab(event,'docs.stack')" id="docs.stackTab">stack</button><button class="side" onclick="chTab(event,'docs.string')" id="docs.stringTab">string</button><button class="side" onclick="chTab(event,'docs.types')" id="docs.typesTab">types</button>
 </div>
 <div class="w3-container mid" style="margin-left: 200px;">
-  <div id="QuickStart" class="w3-panel section" style="display:block">
-    So, you decided to learn QoLang? Then, you're in the right place, the official documentation.
-    <h1>How does it work?</h1>
-    <i>Skip this part if the only thing you want to learn is the language itself.</i>
-    <p>
-      The QoLang interpreter is made of 3 different parts; Lexer, Parser, and the actual Interpreter.
-      <h2>Lexer</h2>
-      <p>
-        Lexer is the part of QoLang that iterates through the characters in the input file and returns tokens.
-        <br />
-        Example:
-        <pre>
-<code class="language-qo line-numbers">println("Hello, world!");</code>
-        </pre>
-        After lexing:
-        <pre><code class="language-qo line-numbers">Token(FUNCCALL, 'println', 1, 8)
-Token(LPAREN, '(', 1, 9)
-Token(STRING, 'Hello, world!', 1, 24)
-Token(RPAREN, ')', 1, 25)
-Token(SEMI, ';', 1, 26)</code>
-        </pre>
-        What it did is:
-        <ol>
-            <li>Get a char.</li>
-            <li>It's an alnum (alpha-numerical) or <code>_</code>, get an ID.</li>
-            <li>Got variable <code>println</code>, but it has <code>(</code> character after the ID. This is a function call.</li>
-            <li>Got token <code>(</code></li>
-            <li>Got char <code>"</code>, so this is a string.</li>
-            <li>Got token STRING <code>Hello, world!</code></li>
-            <li>Got token <code>)</code></li>
-            <li>Got token <code>;</code></li>
-        </ol>
-      </p>
-      <h2>Parser</h2>
-      <p>
-        Now, we have some tokens. Time to parse these!
-        <br />
-        It will do these:
-        <ol>
-            <li>Call <code>statement</code> function</li>
-            <li>Got FUNCCALL, call <code>fnccall</code> function.</li>
-            <li>Token is FUNCCALL, no errors.</li>
-            <li>Token is LPAREN, no errors.</li>
-            <li>Call <code>expr</code> function.</li>
-            <li>Got STRING <code>Hello, world!</code>.</li>
-            <li>Couldn't find COMMA token, found RPAREN instead. No errors.</li>
-            <li>Return an <code>FuncCall</code> AST Node with the args and the function.</li>
-            <li>Token is SEMI, no errors.</li>
-        </ol>
-      </p>
-      <h2>Interpreter</h2>
-      <p>
-        This is the part where we do things.
-        <ol>
-            <li>We have an AST Node called <code>FuncCall</code>, call <code>visit_FuncCall</code>.</li>
-            <li>No variable named <code>println</code> exists, but <code>func_println</code> does. This is a built-in function, call <code>visit_BuiltinFunc</code></li>
-            <li>Call the function with the <code>Variables</code> class instance and the arguments.</li>
-            <li>Print the string.</li>
-            <li>Update the <code>Variables</code> class instance.</li>
-        </ol>
-      </p>
-      Congratulations for us, we have printed <code>Hello, world!</code>
-    </p>
-    <h1>Example</h1>
-    The example from Github:
-    <pre class="language-qo line-numbers" data-src="https://raw.githubusercontent.com/QoLang/QoLang/master/example/test.qo"></pre>
-
-    For information about standard functions, see <a href="#StandardLib" onclick="window.location.hash = '#StandardLib'; window.location.reload()">Standard Library Documentation</a>.
-  </div>
-  <div id="StandardLib" class="w3-panel section" style="display:none">
-    <h1>Table of Contents</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Function</th>
-          <th>Return</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="#docs.func_print"><code class="language-qo">print(...)</code></a></td>
-          <td><code>None</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_println"><code class="language-qo">println(...)</code></a></td>
-          <td><code>None</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_input"><code class="language-qo">input(prompt)</code></a></td>
-          <td><code>Str</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_toInt"><code class="language-qo">toInt(value)</code></a></td>
-          <td><code>Int</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_toBool"><code class="language-qo">toBool(value)</code></a></td>
-          <td><code>Bool</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_toStr"><code class="language-qo">toStr(value)</code></a></td>
-          <td><code>Str</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_type"><code class="language-qo">type(value)</code></a></td>
-          <td><code>Str</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_exit"><code class="language-qo">exit(exitcode)</code></a></td>
-          <td>Exits before returning</td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_mod"><code class="language-qo">mod(integer1, integer2)</code></a></td>
-          <td><code>Int</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_hasAttr"><code class="language-qo">hasAttr(root, variable)</code></a></td>
-          <td><code>Bool</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_exists"><code class="language-qo">exists(variable)</code></a></td>
-          <td><code>Bool</code></td>
-        </tr>
-        <tr>
-          <td><a href="#docs.func_remove"><code class="language-qo">remove(variable)</code></a></td>
-          <td><code>None</code></td>
-        </tr>
-      </tbody>
-    </table>
-    <h1>Documentation</h1>
-    <h3 id="docs.func_print"><a href="#docs.func_print"><code class="language-qo">print(...)</code></a></h3>
-    <p>
-      Print something, multiple values are joined with <code>" "</code> as delimiter. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-print("Hello, world!");
-print("Hello,", "world!");
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_println"><a href="#docs.func_println"><code class="language-qo">println(...)</code></a></h3>
-    <p>
-      Print something with newlnie, multiple values are joined with <code>" "</code> as delimiter. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-println("Hello, world!");
-println("Hello,", "world!");
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_input"><a href="#docs.func_input"><code class="language-qo">input(prompt)</code></a></h3>
-    <p>
-      Get input with specified prompt. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-command = input("> ");
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_toInt"><a href="#docs.func_toInt"><code class="language-qo">toInt(value)</code></a></h3>
-    <p>
-      Convert any type of variable to Int.<br />
-      Example:
-      <pre>
-        <code class="language-qo">
-mynum = toInt("10");
-mynum = toInt(10);
-mynum = toInt(True);
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_toBool"><a href="#docs.func_toBool"><code class="language-qo">toBool(value)</code></a></h3>
-    <p>
-      Convert any type of variable to Bool. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-mybool = toBool("");
-mybool = toBool(1);
-mybool = toBool(True);
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_toStr"><a href="#docs.func_toStr"><code class="language-qo">toStr(value)</code></a></h3>
-    <p>
-      Convert any type of variable to Str. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-mystr = toStr("abc");
-mystr = toStr(1351);
-mystr = toStr(False);
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_type"><a href="#docs.func_type"><code class="language-qo">type(value)</code></a></h3>
-    <p>
-      Get type of something. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-mytype = type(False);
-mytype = type(13613);
-mytype = type("hey");
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_exit"><a href="#docs.func_exit"><code class="language-qo">exit(exitcode)</code></a></h3>
-    <p>
-      Exit with code. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-exit();
-exit(1);
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_mod"><a href="#docs.func_mod"><code class="language-qo">mod(integer1, integer2)</code></a></h3>
-    <p>
-      Math modulus function. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-mynum = mod(5, 3);
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_hasAttr"><a href="#docs.func_hasAttr"><code class="language-qo">hasAttr(root, variable)</code></a></h3>
-    <p>
-      Check if a variable has an attribute. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-mybool = hasAttr(&qcfi, "set");
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_exists"><a href="#docs.func_exists"><code class="language-qo">exists(variable)</code></a></h3>
-    <p>
-      Check if a variable exists. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-mybool = exists(&hello);
-        </code>
-      </pre>
-    </p>
-    <h3 id="docs.func_remove"><a href="#docs.func_remove"><code class="language-qo">remove(variable)</code></a></h3>
-    <p>
-      Remove a variable. <br />
-      Example:
-      <pre>
-        <code class="language-qo">
-hello = "Hello!";
-remove(&hello);
-println(exists(&hello)); /* False */
-        </code>
-      </pre>
-    </p>
-  </div>
+<div id="docs.std" class="w3-panel section" style="display:block">
+The standard library.
+<h1>Table of Contents</h1><ul><li><a href="#docs.std.print"><code>print(...)</code></a></li><li><a href="#docs.std.println"><code>println(...)</code></a></li><li><a href="#docs.std.input"><code>input(prompt)</code></a></li><li><a href="#docs.std.exit"><code>exit(exitcode)</code></a></li><li><a href="#docs.std.hasAttr"><code>hasAttr(&root, attribute)</code></a></li><li><a href="#docs.std.exists"><code>exists(&variable)</code></a></li><li><a href="#docs.std.remove"><code>remove(&variable)</code></a></li><li><a href="#docs.std.move"><code>move(&variable, &newname)</code></a></li><li><a href="#docs.std.sleep"><code>sleep(seconds)</code></a></li><li><a href="#docs.std.len"><code>len(variable)</code></a></li><li><a href="#docs.std.chr"><code>chr(asciivalue)</code></a></li><li><a href="#docs.std.ord"><code>ord(character)</code></a></li><li><a href="#docs.std.formatdate"><code>formatdate(date, format)</code></a></li></ul><h1>Documentation</h1><div><h3 id="docs.std.print"><a href="#docs.std.print"><code class="language-qo">print(...)</code></a></h3><br/>    Print something, multiple values are joined with " " as delimiter.<br/>    </div><div><h3 id="docs.std.println"><a href="#docs.std.println"><code class="language-qo">println(...)</code></a></h3><br/>    Print something with newline, multiple values are joined with " " as delimiter.<br/>    </div><div><h3 id="docs.std.input"><a href="#docs.std.input"><code class="language-qo">input(prompt)</code></a></h3><br/>    Get input with specified prompt.<br/>    </div><div><h3 id="docs.std.exit"><a href="#docs.std.exit"><code class="language-qo">exit(exitcode)</code></a></h3><br/>    Exit with code.<br/>    </div><div><h3 id="docs.std.hasAttr"><a href="#docs.std.hasAttr"><code class="language-qo">hasAttr(&root, attribute)</code></a></h3><br/>    Check if a variable has an attribute.<br/>    </div><div><h3 id="docs.std.exists"><a href="#docs.std.exists"><code class="language-qo">exists(&variable)</code></a></h3><br/>    Check if a variable exists.<br/>    </div><div><h3 id="docs.std.remove"><a href="#docs.std.remove"><code class="language-qo">remove(&variable)</code></a></h3><br/>    Remove a variable.<br/>    </div><div><h3 id="docs.std.move"><a href="#docs.std.move"><code class="language-qo">move(&variable, &newname)</code></a></h3><br/>    Move a variable with attributes.<br/>    </div><div><h3 id="docs.std.sleep"><a href="#docs.std.sleep"><code class="language-qo">sleep(seconds)</code></a></h3><br/>    Sleep n seconds.<br/>    </div><div><h3 id="docs.std.len"><a href="#docs.std.len"><code class="language-qo">len(variable)</code></a></h3><br/>    Get length of something.<br/>    </div><div><h3 id="docs.std.chr"><a href="#docs.std.chr"><code class="language-qo">chr(asciivalue)</code></a></h3><br/>    Get character by ASCII value.<br/>    </div><div><h3 id="docs.std.ord"><a href="#docs.std.ord"><code class="language-qo">ord(character)</code></a></h3><br/>    Get ASCII value of character.<br/>    </div><div><h3 id="docs.std.formatdate"><a href="#docs.std.formatdate"><code class="language-qo">formatdate(date, format)</code></a></h3><br/>    Format UNIX timestamp.<br/>    </div></div><div id="docs.file" class="w3-panel section" style="display:none">
+The file module provides functions for working with files.
+<h1>Table of Contents</h1><ul><li><a href="#docs.file.SEEK_SET"><code>file.SEEK_*</code></a></li><li><a href="#docs.file.open"><code>file.open(path, mode)</code></a></li><li><a href="#docs.file.read"><code>file.read(file)</code></a></li><li><a href="#docs.file.readlines"><code>file.readlines(file)</code></a></li><li><a href="#docs.file.list"><code>file.list(path)</code></a></li><li><a href="#docs.file.readline"><code>file.readline(file)</code></a></li><li><a href="#docs.file.write"><code>file.write(file, data)</code></a></li><li><a href="#docs.file.close"><code>file.close(file)</code></a></li><li><a href="#docs.file.isfile"><code>file.isfile(path)</code></a></li><li><a href="#docs.file.isdir"><code>file.isdir(path)</code></a></li><li><a href="#docs.file.readable"><code>file.readable(file)</code></a></li><li><a href="#docs.file.writable"><code>file.writable(file)</code></a></li><li><a href="#docs.file.seekable"><code>file.seekable(file)</code></a></li><li><a href="#docs.file.fd"><code>file.fd(file)</code></a></li><li><a href="#docs.file.truncate"><code>file.truncate(file, size)</code></a></li><li><a href="#docs.file.flush"><code>file.flush(file)</code></a></li><li><a href="#docs.file.tell"><code>file.tell(file)</code></a></li><li><a href="#docs.file.seek"><code>file.seek(file, offset, mode)</code></a></li></ul><h1>Documentation</h1><div><h3 id="docs.file.SEEK_SET"><a href="#docs.file.SEEK_SET"><code class="language-qo">file.SEEK_*</code></a></h3><br/>    <code>file.SEEK_SET</code>: Seek from the beginning of the file.<br/>    <code>file.SEEK_CUR</code>: Seek from the current position.<br/>    <code>file.SEEK_END</code>: Seek from the end of the file.<br/><br/>    Mode variables for file.seek(file, offset, mode).<br/>    </div><div><h3 id="docs.file.open"><a href="#docs.file.open"><code class="language-qo">file.open(path, mode)</code></a></h3><br/>    Open a file.<br/>    </div><div><h3 id="docs.file.read"><a href="#docs.file.read"><code class="language-qo">file.read(file)</code></a></h3>    <br/>    Read a file.<br/>    </div><div><h3 id="docs.file.readlines"><a href="#docs.file.readlines"><code class="language-qo">file.readlines(file)</code></a></h3><br/>    Read lines from a file.<br/>    </div><div><h3 id="docs.file.list"><a href="#docs.file.list"><code class="language-qo">file.list(path)</code></a></h3><br/>    Get file list in a directory.<br/>    </div><div><h3 id="docs.file.readline"><a href="#docs.file.readline"><code class="language-qo">file.readline(file)</code></a></h3><br/>    Read a line from a file.<br/>    </div><div><h3 id="docs.file.write"><a href="#docs.file.write"><code class="language-qo">file.write(file, data)</code></a></h3><br/>    Write to a file.<br/>    </div><div><h3 id="docs.file.close"><a href="#docs.file.close"><code class="language-qo">file.close(file)</code></a></h3><br/>    Close a file.<br/>    </div><div><h3 id="docs.file.isfile"><a href="#docs.file.isfile"><code class="language-qo">file.isfile(path)</code></a></h3><br/>    Check if a path is a file.<br/>    </div><div><h3 id="docs.file.isdir"><a href="#docs.file.isdir"><code class="language-qo">file.isdir(path)</code></a></h3><br/>    Check if a path is a directory.<br/>    </div><div><h3 id="docs.file.readable"><a href="#docs.file.readable"><code class="language-qo">file.readable(file)</code></a></h3><br/>    Check if a file is readable.<br/>    </div><div><h3 id="docs.file.writable"><a href="#docs.file.writable"><code class="language-qo">file.writable(file)</code></a></h3><br/>    Check if a file is writable.<br/>    </div><div><h3 id="docs.file.seekable"><a href="#docs.file.seekable"><code class="language-qo">file.seekable(file)</code></a></h3><br/>    Check if a file is seekable.<br/>    </div><div><h3 id="docs.file.fd"><a href="#docs.file.fd"><code class="language-qo">file.fd(file)</code></a></h3><br/>    Get a file's file descriptor.<br/>    </div><div><h3 id="docs.file.truncate"><a href="#docs.file.truncate"><code class="language-qo">file.truncate(file, size)</code></a></h3><br/>    Resize a file.<br/>    </div><div><h3 id="docs.file.flush"><a href="#docs.file.flush"><code class="language-qo">file.flush(file)</code></a></h3><br/>    Flush the write buffers of the file.<br/>    </div><div><h3 id="docs.file.tell"><a href="#docs.file.tell"><code class="language-qo">file.tell(file)</code></a></h3><br/>    Get the current position of the file.<br/>    </div><div><h3 id="docs.file.seek"><a href="#docs.file.seek"><code class="language-qo">file.seek(file, offset, mode)</code></a></h3><br/>    Seek to a position in a file.<br/>    </div></div><div id="docs.qcf" class="w3-panel section" style="display:none">
+The qcf module provides functions for working with QCF files.
+<h1>Table of Contents</h1><ul><li><a href="#docs.qcf.new"><code>newqcf(file, &variable)</code></a></li></ul><h1>Documentation</h1><div><h3 id="docs.qcf.new"><a href="#docs.qcf.new"><code class="language-qo">newqcf(file, &variable)</code></a></h3><br/>    Create a new QCF instance.<br/>    </div></div><div id="docs.qo" class="w3-panel section" style="display:none">
+The qo module provides functions for working with the current QoLang environment.
+<h1>Table of Contents</h1><ul><li><a href="#docs.qo.args"><code>qo.args</code></a></li><li><a href="#docs.qo.exportAll"><code>qo.exportAll()</code></a></li><li><a href="#docs.qo.env"><code>qo.env(variable)</code></a></li><li><a href="#docs.qo.version"><code>qo.version()</code></a></li></ul><h1>Documentation</h1><div><h3 id="docs.qo.args"><a href="#docs.qo.args"><code class="language-qo">qo.args</code></a></h3><br/>    The arguments passed to the script.<br/>    </div><div><h3 id="docs.qo.exportAll"><a href="#docs.qo.exportAll"><code class="language-qo">qo.exportAll()</code></a></h3><br/>    Export all variables.<br/>    </div><div><h3 id="docs.qo.env"><a href="#docs.qo.env"><code class="language-qo">qo.env(variable)</code></a></h3>    <br/>    Get an environment variable.<br/>    </div><div><h3 id="docs.qo.version"><a href="#docs.qo.version"><code class="language-qo">qo.version()</code></a></h3>    <br/>    QoLang version.<br/>    </div></div><div id="docs.random" class="w3-panel section" style="display:none">
+The random module provides functions for working with random numbers.
+<h1>Table of Contents</h1><ul><li><a href="#docs.random.range"><code>random.range(start, stop, step)</code></a></li><li><a href="#docs.random.int"><code>random.int(min, max)</code></a></li><li><a href="#docs.random.choice"><code>random.choice(list)</code></a></li><li><a href="#docs.random.shuffle"><code>random.shuffle(list)</code></a></li></ul><h1>Documentation</h1><div><h3 id="docs.random.range"><a href="#docs.random.range"><code class="language-qo">random.range(start, stop, step)</code></a></h3><br/>    Return a randomly selected element from range(start, stop, step).<br/>    </div><div><h3 id="docs.random.int"><a href="#docs.random.int"><code class="language-qo">random.int(min, max)</code></a></h3><br/>    Alias for random.range(a, b+1, 1);<br/>    </div><div><h3 id="docs.random.choice"><a href="#docs.random.choice"><code class="language-qo">random.choice(list)</code></a></h3><br/>    Return a random element from a non-empty list.<br/>    </div><div><h3 id="docs.random.shuffle"><a href="#docs.random.shuffle"><code class="language-qo">random.shuffle(list)</code></a></h3><br/>    Shuffle a list.<br/>    </div></div><div id="docs.stack" class="w3-panel section" style="display:none">
+The stack module implements stacks for variables.
+<h1>Table of Contents</h1><ul><li><a href="#docs.stack.push"><code>stack.push(variable)</code></a></li><li><a href="#docs.stack.pop"><code>stack.pop(variable)</code></a></li><li><a href="#docs.stack.get"><code>stack.get(variable)</code></a></li></ul><h1>Documentation</h1><div><h3 id="docs.stack.push"><a href="#docs.stack.push"><code class="language-qo">stack.push(variable)</code></a></h3><br/>    Push a variable into its stack.<br/>    </div><div><h3 id="docs.stack.pop"><a href="#docs.stack.pop"><code class="language-qo">stack.pop(variable)</code></a></h3><br/>    Pop a variable from its stack.<br/>    </div><div><h3 id="docs.stack.get"><a href="#docs.stack.get"><code class="language-qo">stack.get(variable)</code></a></h3><br/>    Get the stack of a variable.<br/>    </div></div><div id="docs.string" class="w3-panel section" style="display:none">
+The string module provides functions for working with strings.
+<h1>Table of Contents</h1><ul><li><a href="#docs.string.getAfter"><code>string.getAfter(string, seperator)</code></a></li><li><a href="#docs.string.deleteAfter"><code>string.deleteAfter(string, seperator)</code></a></li><li><a href="#docs.string.split"><code>string.split(string, seperator)</code></a></li><li><a href="#docs.string.replace"><code>string.replace(string, old, new)</code></a></li><li><a href="#docs.string.format"><code>string.format(string)</code></a></li><li><a href="#docs.string.join"><code>string.join(list, seperator)</code></a></li><li><a href="#docs.string.startsWith"><code>string.startsWith(string, substring)</code></a></li><li><a href="#docs.string.endsWith"><code>string.endsWith(string, substring)</code></a></li></ul><h1>Documentation</h1><div><h3 id="docs.string.getAfter"><a href="#docs.string.getAfter"><code class="language-qo">string.getAfter(string, seperator)</code></a></h3><br/>    Get the content after a seperator in a string.<br/>    </div><div><h3 id="docs.string.deleteAfter"><a href="#docs.string.deleteAfter"><code class="language-qo">string.deleteAfter(string, seperator)</code></a></h3><br/>    Delete the content after a seperator in a string.<br/>    </div><div><h3 id="docs.string.split"><a href="#docs.string.split"><code class="language-qo">string.split(string, seperator)</code></a></h3><br/>    Split a string with specified seperator.<br/>    </div><div><h3 id="docs.string.replace"><a href="#docs.string.replace"><code class="language-qo">string.replace(string, old, new)</code></a></h3><br/>    Replace something with something else in a string.<br/>    </div><div><h3 id="docs.string.format"><a href="#docs.string.format"><code class="language-qo">string.format(string)</code></a></h3><br/>    Format a string.<br/>    </div><div><h3 id="docs.string.join"><a href="#docs.string.join"><code class="language-qo">string.join(list, seperator)</code></a></h3><br/>    Join a list with a delimeter.<br/>    </div><div><h3 id="docs.string.startsWith"><a href="#docs.string.startsWith"><code class="language-qo">string.startsWith(string, substring)</code></a></h3><br/>    Check if string starts with another string.<br/>    </div><div><h3 id="docs.string.endsWith"><a href="#docs.string.endsWith"><code class="language-qo">string.endsWith(string, substring)</code></a></h3><br/>    Check if string ends with another string.<br/>    </div></div><div id="docs.types" class="w3-panel section" style="display:none">
+The types module contains functions for working with types.
+<h1>Table of Contents</h1><ul><li><a href="#docs.types.toInt"><code>types.toInt(variable)</code></a></li><li><a href="#docs.types.toBool"><code>types.toBool(variable)</code></a></li><li><a href="#docs.types.toStr"><code>types.toStr(variable)</code></a></li><li><a href="#docs.types.toFloat"><code>types.toFloat(variable)</code></a></li><li><a href="#docs.types.type"><code>types.type(variable)</code></a></li></ul><h1>Documentation</h1><div><h3 id="docs.types.toInt"><a href="#docs.types.toInt"><code class="language-qo">types.toInt(variable)</code></a></h3><br/>    Convert any type of variable to Int.<br/>    </div><div><h3 id="docs.types.toBool"><a href="#docs.types.toBool"><code class="language-qo">types.toBool(variable)</code></a></h3><br/>    Convert any type of variable to Bool.<br/>    </div><div><h3 id="docs.types.toStr"><a href="#docs.types.toStr"><code class="language-qo">types.toStr(variable)</code></a></h3><br/>    Convert any type of variable to Str.<br/>    </div><div><h3 id="docs.types.toFloat"><a href="#docs.types.toFloat"><code class="language-qo">types.toFloat(variable)</code></a></h3><br/>    Convert any type of variable to Float.<br/>    </div><div><h3 id="docs.types.type"><a href="#docs.types.type"><code class="language-qo">types.type(variable)</code></a></h3><br/>    Get type of something.<br/>    </div></div>
 </div>
 <script>
 if (window.location.hash && document.getElementById(window.location.hash.substring(1) + "Tab")) {
@@ -304,9 +47,9 @@ if (window.location.hash && window.location.hash.startsWith("#docs.")) {
   for (i = 0; i < x.length; i++) {
     tablinks[i].className = tablinks[i].className.replace("side-active", "");
   }
-  document.getElementById("StandardLib").style.display = "block";
-  document.getElementById("StandardLibTab").className += " side-active";
-  document.getElementById(window.location.hash.substring(1)).scrollIntoView();
+  document.getElementById(window.location.hash.substr(1)).style.display = "block";
+  document.getElementById(window.location.hash.substr(1) + "Tab").className += " side-active";
+  document.getElementById(window.location.hash.substr(1)).scrollIntoView();
 }
 
 function chTab(evt, tab) {

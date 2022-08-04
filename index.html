@@ -33,8 +33,9 @@ println("Hello, world!");
     A simple example:
     <pre>
       <code class="language-qo">
-myinteger = toInt(input("Enter an integer: "));
-println(myinteger, "% 2 ==", mod(myinteger, 2));
+include types;
+myinteger = types.toInt(input("Enter an integer: "));
+println(myinteger, "% 2 ==", myinteger % 2);
       </code>
     </pre>
     Every statement in QoLang (including statements like <code class="language-qo">if</code>) end with <code class="language-qo">;</code>. <br />
