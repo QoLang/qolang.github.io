@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .head {
     background-color: #262626;
 }
