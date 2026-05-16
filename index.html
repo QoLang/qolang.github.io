@@ -1,108 +1,116 @@
 <!DOCTYPE html>
-<html>
-<title>QoLang</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://prismjs.com/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" />
-<link href="https://prismjs.com/plugins/toolbar/prism-toolbar.css" rel="stylesheet" />
-<link href="/style/prism-apprentice/prism-apprentice.css" rel="stylesheet" />
-<link href="/style/index.css" rel="stylesheet" />
-<link href="/style/apprentice.css" rel="stylesheet" />
-<body class="">
-<!-- Page Content -->
-<div class="w3-container border-bottom mid head">
-  <h1><img src="/images/qolang.png" width="32"/> The Qo Programming Language</h1>
-  The Qo Programming Language is a simple language with simple syntax.
-<pre><code class="language-qo line-numbers">
-/*
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QoLang</title>
+    <link rel="icon" href="images/qolang.png" type="image/png">
+    <link href="https://prismjs.com/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" />
+    <link href="https://prismjs.com/plugins/toolbar/prism-toolbar.css" rel="stylesheet" />
+    <link href="style/prism-apprentice/prism-apprentice.css" rel="stylesheet" />
+    <link href="style/output.css" rel="stylesheet">
+    <style>
+        code {
+            background-color: var(--color-black);
+            padding: 0.25rem 0.5rem;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body class="bg-bright-black text-white">
+    <div class="fixed right-12 bottom-24 flex flex-col items-center opacity-50 max-lg:invisible cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <span class="text-xs uppercase tracking-widest rotate-90 mb-4">TOP</span>
+            <div class="w-[1px] h-8 bg-foreground/30 relative">
+                <div class="absolute top-0 left-0 w-full h-1/3 bg-foreground animate-pulse"></div>
+            </div>
+        </div>
+    <header class="w-full px-8 py-8 bg-background flex flex-col items-center justify-between border-b-2 border-bright-black space-y-4">
+        <nav class="flex justify-between items-center z-10 self-end">
+            <div class="text-sm tracking-wider uppercase"></div>
+            <div class="flex gap-8 text-sm uppercase tracking-wider">
+                <a href="docs/index.html" class="hover:text-accent1 transition-colors">Documentation</a>
+                <a href="https://github.com/QoLang/QoLang" class="hover:text-accent1 transition-colors">GitHub</a>
+            </div>
+        </nav>
+        <div class="flex items-center justify-center gap-2">
+            <img src="images/qolang.png" alt="QoLang Logo" class="h-12 w-12">
+            <h1 class="text-4xl font-bold text-foreground">QoLang</h1>
+        </div>
+        <p class="flex text-foreground mt-2">The Qo Programming Language is a simple language with simple syntax.</p>
+        <pre class="flex w-xl max-sm:w-md"><code class="language-qo line-numbers text-lg">/*
 Printing in QoLang.
 */
 
 println("Hello, world!");
 </code></pre>
-<center>
-  <button class="tab active-tab" onclick="chTab(event,'About')" id="AboutTab">About</button>
-  <button class="tab" onclick="chTab(event,'Install')" id="InstallTab">Install</button>
-  <button class="tab" onclick="chTab(event,'Related')" id="RelatedTab">Related Projects</button>
-  <button class="tab" onclick="window.location.href = '/docs'">Documentation</button>
-</center>
-</div>
-<div class="w3-container mid">
-  <div id="About" class="w3-panel section" style="display:block">
-    The Qo Programming Language (or shortly, QoLang) is a new interpreted language with a simple syntax. <br />
+    </header>
+    <br>
+    <div id="about" class="text-foreground mt-4 container mx-auto rounded-3xl border border-bright-black bg-background p-6 shadow-xl shadow-black/50 px-8 py-8">
+            <h2 class="text-2xl font-bold text-foreground">About QoLang</h2>
+            The Qo Programming Language (or shortly, QoLang) is a new interpreted language with a simple syntax. <br />
     A simple example:
     <pre>
       <code class="language-qo">
-include types;
+include types;  
 myinteger = types.toInt(input("Enter an integer: "));
 println(myinteger, "% 2 ==", myinteger % 2);
       </code>
     </pre>
-    Every statement in QoLang (including statements like <code class="language-qo">if</code>) end with <code class="language-qo">;</code>. <br />
-    QoLang is a pretty new language, with too few contributors, so it may have some bugs. If you notice something is wrong with QoLang, please <a href="https://github.com/QoLang/QoLang/issues/new">create an issue</a> in GitHub.
-  </div>
-  <div id="Install" class="w3-panel section" style="display:none">
-    <h3>GNU/Linux and Microsoft Windows</h3>
+    QoLang is a pretty new language, with too few contributors, so it may have some bugs. If you notice something is wrong with QoLang,
+    please <a href="https://github.com/QoLang/QoLang/issues/new" class="text-bright-blue hover:underline hover:text-blue">create an issue</a> in GitHub.
+        
+    </div>
+    <div id="install" class="text-foreground mt-4 container mx-auto rounded-3xl border border-bright-black bg-background p-6 shadow-xl shadow-black/50 px-8 py-8">
+        <h2 class="text-3xl font-bold text-foreground">Installation</h2>
+    <h3 class="text-2xl font-bold text-foreground">GNU/Linux and Microsoft Windows</h3>
     <p>
-      Use the <a href="https://github.com/QoLang/installer">installer</a>.
+      Use the <a href="https://github.com/QoLang/installer" class="text-bright-blue hover:underline hover:text-blue">installer</a>.
     </p>
-    <h3>Alternative way for Microsoft Windows</h3>
+    <h3 class="text-2xl font-bold text-foreground">Alternative way for Microsoft Windows</h3>
     <p>
-      Download the binary from here: <a href="https://github.com/QoLang/QoLang/releases/latest"><img src="/images/get_qolang.svg"></img></a>
-      <ol>
+    <ol class="list-decimal list-inside">
+        <li>Download the binary from here: <a href="https://github.com/QoLang/QoLang/releases/latest"><img src="images/get_qolang.svg" style="display: inline;" class="border border-bright-black"></a></li>
         <li>Create a directory called <code>qolang</code> under <code>C:\</code>, then copy the executable file you just downloaded to that folder. <br/><b>Note:</b> Don't download both files and copy them to that folder. Download only the <code>qo.exe</code> file because <code>.exe</code> files are the executable files for Windows.</li>
-        <li>Create a directory called <code>libs</code> under <code>C:\qolang\</code>, then copy all files in <a href="https://github.com/QoLang/QoLang/tree/master/libs">libs</a> directory to that folder.<br/><b>Note:</b> Don't save it by right clicking at the page and clicking "Save as...", click the "Raw" button and save that page instead.</li>
+        <li>Create a directory called <code>libs</code> under <code>C:\qolang\</code>, then copy all files in <a href="https://github.com/QoLang/QoLang/tree/master/libs"  class="text-bright-blue hover:underline hover:text-blue">libs</a> directory to that folder.<br/><b>Note:</b> Don't save it by right clicking at the page and clicking "Save as...", click the "Raw" button and save that page instead.</li>
         <li>Run <code>cmd.exe</code> as Administrator, and run <code>setx PATH "%PATH%;C:\qolang"</code></li>
-      </ol>
-      To test it, create a file called <code>test.qo</code> and write the following code in it:
-      <pre>
+    </ol>
+    To test it, create a file called <code>test.qo</code> and write the following code in it:
+    <pre>
         <code class="language-qo">
 println("Hello, world!");
         </code>
-      </pre>
-      After saving the file, copy the path the file is in, eg. <code>C:\Users\user</code>. Press Windows Key + R and type <code>cmd</code>, type <code>cd </code> (with the space after cd) and click right mouse button the paste the clipboard content, and press Enter. Now you can run your file, to do it run <code>qo test.qo</code>.<br />
-      <b>Note:</b> This guide was not tested, and there may be mistakes. If you notice something that shouldn't be, please <a href="mailto:qolang@camroku.tech">contact us</a>.
+      </pre>After saving the file, copy the path the file is in, eg. <code class="display:">C:\Users\user</code>. Press Windows Key + R and type
+        <code>cmd</code>, type <code>cd </code> (with the space after cd) and click right mouse button the paste the clipboard content, and press Enter.
+        Now you can run your file, to do it run <code>qo test.qo</code><br>
+      <b>Note:</b> This guide was not tested, and there may be mistakes. If you notice something that shouldn't be, please
+      <a href="mailto:qolang@camroku.tech" class="text-bright-blue hover:underline hover:text-blue">contact us</a>.
     </p>
-    <h3>Other</h3>
+    <h3 class="text-2xl font-bold text-foreground">Other</h3>
     <p>
       QoLang currently doesn't have support for other operating systems, so you need a GNU/Linux virtual machine (or WSL on Windows) to run QoLang.
     </p>
-  </div>
-  <div id="Related" class="w3-panel section" style="display:none">
-    <ul>
-      <li><a href="https://github.com/QoLang/QoLang">QoLang/QoLang</a> - QoLang itself</li>
-      <li><a href="https://github.com/QoLang/qo-prism">QoLang/qo-prism</a> - QoLang support for Prism.js</li>
-      <li><a href="https://github.com/QoLang/website">QoLang/website</a> - This website</li>
-      <li><a href="https://github.com/QoLang/installer">QoLang/installer</a> - Installer for QoLang</li>
-      <li><a href="https://github.com/Camroku/Camlog">Camroku/Camlog</a> - A blog software, written in QoLang with support of libraries written in Python</li>
+    </p>
+    </div>
+    <div id="related" class="text-foreground mt-4 container mx-auto rounded-3xl border border-bright-black bg-background p-6 shadow-xl shadow-black/50 px-8 py-8">
+    <h2 class="text-3xl font-bold text-foreground">Related Projects</h2>
+    <p>
+    <ul class="list-disc list-inside">
+        <li><a href="https://github.com/QoLang/QoLang" class="text-bright-blue hover:underline hover:text-blue">QoLang/QoLang</a> - QoLang itself</li>
+        <li><a href="https://github.com/QoLang/qo-prism" class="text-bright-blue hover:underline hover:text-blue">QoLang/qo-prism</a> - QoLang support for Prism.js</li>
+        <li><a href="https://github.com/QoLang/website" class="text-bright-blue hover:underline hover:text-blue">QoLang/website</a> - This website</li>
+        <li>(abandoned) <a href="https://github.com/QoLang/installer" class="text-bright-blue hover:underline hover:text-blue">QoLang/installer</a> - Installer for QoLang</li>
+        <li><a href="https://github.com/Camroku/Camlog" class="text-bright-blue hover:underline hover:text-blue">Camroku/Camlog</a> - A blog software, written in QoLang with support of libraries written in Python</li>
     </ul>
-  </div>
-</div>
-<script>
-if (window.location.hash && document.getElementById(window.location.hash.substring(1) + "Tab")) {
-  document.getElementById(window.location.hash.substring(1) + "Tab").click();
-}
+    </p>
+    </div>
+</body>
 
-function chTab(evt, tab) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("section");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tab");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace("active-tab", "");
-  }
-  document.getElementById(tab).style.display = "block";
-  evt.currentTarget.className += " active-tab";
-  history.pushState({}, "", "#" + tab);
-}
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
-<script src="https://prismjs.com/plugins/toolbar/prism-toolbar.js"></script>
 <script src="https://prismjs.com/plugins/line-numbers/prism-line-numbers.js"></script>
 <script src="https://prismjs.com/plugins/normalize-whitespace/prism-normalize-whitespace.js"></script>
-<script src="https://prismjs.com/plugins/show-language/prism-show-language.js"></script>
-<script src="/scripts/qo-prism/qo-prism.js"></script>
-</body>
+<script src="scripts/qo-prism/qo-prism.js"></script>
 </html>
